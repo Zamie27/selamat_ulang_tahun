@@ -26,6 +26,32 @@
         animation: fadeIn 0.8s ease-in-out;
       }
 
+      .memories {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Di belakang konten */
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .memories.show {
+        opacity: 0.15; /* Bisa disesuaikan */
+      }
+
+      .memories img {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: rotate(var(--rotate));
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -36,11 +62,56 @@
           transform: translateY(0);
         }
       }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .cake-container {
+        animation: float 3s ease-in-out infinite;
+        transition: transform 0.6s ease;
+      }
+
+      .cake-container.clicked {
+        animation: none; /* Stop animasi setelah diklik */
+        transform: translateY(-40px);
+      }
     </style>
   </head>
   <body
     class="flex items-center justify-center min-h-screen flex-col px-6 text-center"
   >
+    <!-- Background kenangan -->
+    <div id="memories" class="memories">
+      <img src="we.png" style="top: 5%; left: 8%; --rotate: -10deg" />
+      <img src="we.png" style="top: 15%; left: 65%; --rotate: 12deg" />
+      <img src="we.png" style="top: 30%; left: 20%; --rotate: -6deg" />
+      <img src="we.png" style="top: 45%; left: 75%; --rotate: 9deg" />
+      <img src="we.png" style="top: 55%; left: 35%; --rotate: -12deg" />
+      <img src="we.png" style="top: 65%; left: 10%; --rotate: 7deg" />
+      <img src="we.png" style="top: 70%; left: 80%; --rotate: -8deg" />
+      <img src="we.png" style="top: 20%; left: 85%; --rotate: 5deg" />
+      <img src="we.png" style="top: 85%; left: 45%; --rotate: -15deg" />
+      <img src="we.png" style="top: 35%; left: 50%; --rotate: 6deg" />
+
+      <!-- Tambahkan lagi sesuai kebutuhan -->
+    </div>
+
+    <!-- Petunjuk klik -->
+    <p class="text-white text-lg sm:text-xl mb-2">
+      Hai wii, selamat ulang tahun
+    </p>
+    <p class="text-white text-lg sm:text-xl mb-6 animate-bounce">
+      Pencet kuenya 🎂
+    </p>
+
+    <!-- Gambar kue -->
     <div
       id="cake"
       class="cake-container cursor-pointer w-80 sm:w-96 md:w-[28rem]"
@@ -48,21 +119,46 @@
       <img src="cake.png" alt="Birthday Cake" class="w-full" />
     </div>
 
-    <p
+    <!-- Container pesan ulang tahun -->
+    <div
       id="message"
-      class="message text-white mt-10 text-3xl sm:text-5xl md:text-6xl leading-relaxed max-w-3xl px-4 sm:px-8"
+      class="message bg-white/10 text-white mt-10 text-xl sm:text-2xl md:text-3xl leading-relaxed max-w-3xl px-6 sm:px-10 py-6 rounded-2xl shadow-lg backdrop-blur-md"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam
-      voluptatem vel nesciunt perspiciatis sequi!
-    </p>
+      <p>
+        "Hai Dewi, selamat yah kamu udah bertahan selama 20 tahun dari semua
+        cobaan dan rintangan yang ada. <br /><br />
+        20 tahun bukan waktu yang sedikit kalau dilihat dari semua cobaan yang
+        harus kamu hadapi. Tapi aku percaya, kamu akan bisa melewati semua
+        rintangan yang ntah akan sesusah apa kedepannya. Dan aku tahu walau
+        nanti kamu menjalani menghadapi kesulitan nanti kedepannya itu bukan
+        bersama aku lagi. Akan aku doakan selalu untuk seorang yang paling aku
+        sayang di hidup ini, semoga kamu diberi selalu rezeki yang banyak serta
+        kebahagiaan nanti kedepannya. Semoga kamu selalu sehat dan kuat. Jangan
+        lupa ibadahnya ya kamu 😊"
+        <br /><br />
+        Selamat Ulang Tahun untuk orang yang paling aku sayang. Semoga kamu suka
+        sama kado yang dari lama kamu inginkan
+        <br /><br />
+        Love U Dewi Maharani 💖
+      </p>
+
+      <!-- Foto akhir -->
+      <img
+        src="we.png"
+        alt="Foto Kenangan"
+        class="w-60 h-60 object-cover rounded-xl mx-auto mt-10 shadow-lg"
+      />
+    </div>
 
     <script>
       const cake = document.getElementById("cake");
       const message = document.getElementById("message");
+      const memories = document.getElementById("memories");
 
       cake.addEventListener("click", () => {
         cake.classList.add("clicked");
         message.classList.add("show");
+        memories.classList.add("show");
       });
     </script>
   </body>
