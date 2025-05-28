@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Birthday Surprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #0d1b2a;
+      }
+
+      .cake-container {
+        transition: transform 0.6s ease;
+      }
+
+      .cake-container.clicked {
+        transform: translateY(-40px);
+      }
+
+      .message {
+        display: none;
+      }
+
+      .message.show {
+        display: block;
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen flex-col px-6 text-center"
+  >
+    <div id="cake" class="cake-container cursor-pointer w-64 sm:w-72 md:w-80">
+      <img src="cake.png" alt="Birthday Cake" class="w-full" />
+    </div>
+
+    <p
+      id="message"
+      class="message text-white mt-8 text-2xl sm:text-3xl md:text-4xl leading-loose max-w-2xl"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam
+      voluptatem vel nesciunt perspiciatis sequi!
+    </p>
+
+    <script>
+      const cake = document.getElementById("cake");
+      const message = document.getElementById("message");
+
+      cake.addEventListener("click", () => {
+        cake.classList.add("clicked");
+        message.classList.add("show");
+      });
+    </script>
+  </body>
+</html>
